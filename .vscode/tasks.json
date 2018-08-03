@@ -1,0 +1,89 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build all",
+            "dependsOn":[
+                "client gopherjs-build",
+                "server go build"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "prepare export-reactGen",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "command": "export PATH=\"$(dirname $(go list -f '{{.Target}}' myitcv.io/react/cmd/reactGen)):$PATH\"",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "client gopherjs-build",
+            "type": "shell",
+            "command": "gopherjs",
+            "args": [
+                "build",
+                "-o",
+                "${workspaceFolder}/server/templates/js/client-app.js"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/client"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "server go build",
+            "type": "shell",
+            "command": "go",
+            "args": [
+                "build",
+                "-o",
+                "${workspaceFolder}/server/payroll-maestro-server"
+            ],
+           "options": {
+                "cwd": "${workspaceFolder}/server"
+            },
+            "problemMatcher": [
+                "$go"
+            ]
+        },
+        {
+            "label": "gopherjs-serve-debug",
+            "type": "shell",
+            "command": "gopherjs",
+            "args": [
+                "serve",
+                "--tags",
+                "debug"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/client"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}
