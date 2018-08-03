@@ -13,5 +13,7 @@ script:
   - go get -u github.com/gin-gonic/gin
   - go get -u go.isomorphicgo.org/go/isokit
   - go get -u honnef.co/go/js/dom
+  - pwd
+  - ls -la
   - cd client && gopherjs build -o ../server/templates/js/client-app.js
   - cd server && go build -o payroll-maestro-server
