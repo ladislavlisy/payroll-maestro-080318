@@ -15,5 +15,5 @@ script:
   - go get -u honnef.co/go/js/dom
   - pwd
   - ls -la
-  - cd client && gopherjs build -o ../server/templates/js/client-app.js
-  - cd server && go build -o payroll-maestro-server
+  - cd $TRAVIS_BUILD_DIR/client && gopherjs build -o ../server/templates/js/client-app.js && cd ..
+  - cd $TRAVIS_BUILD_DIR/server && go build -o payroll-maestro-server && cd ..
