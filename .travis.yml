@@ -1,0 +1,15 @@
+language: go
+install: 
+  - npm install
+  - go get -u github.com/gopherjs/gopherjs
+go:
+  - "1.10"
+before_script:
+  - export PATH=\"$(dirname $(go list -f '{{.Target}}' myitcv.io/react/cmd/reactGen)):$PATH\""
+script:
+  - go get github.com/gin-gonic/gin
+  - go get go.isomorphicgo.org/go/isokit
+  - go get honnef.co/go/js/dom
+  - go get myitcv.io/react
+  - cd client && gopherjs build -o ../server/templates/js/client-app.js
+  - cd server && go build -o payroll-maestro-server
