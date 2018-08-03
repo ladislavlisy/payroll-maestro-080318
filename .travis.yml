@@ -3,11 +3,11 @@ before_install:
   - echo -e "machine github.com\n  login ladislavlisy\n  password $CI_USER_PASSWORD" > ~/.netrc
 install: 
   - npm install
+go:
+  - "1.10.3"
+before_script:
   - go get -u github.com/gopherjs/gopherjs
   - go get -u myitcv.io/react
-go:
-  - "1.10"
-before_script:
   - export PATH="$(dirname $(go list -f '{{.Target}}' myitcv.io/react/cmd/reactGen)):$PATH"
 script:
   - go get -u github.com/gin-gonic/gin
