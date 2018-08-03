@@ -1,4 +1,6 @@
 language: go
+before_install:
+  - echo -e "machine github.com\n  login ladislavlisy\n  password $CI_USER_PASSWORD" > ~/.netrc
 install: 
   - npm install
   - go get -u github.com/gopherjs/gopherjs
