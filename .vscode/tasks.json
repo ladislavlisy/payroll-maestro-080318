@@ -84,6 +84,32 @@
                 "showReuseMessage": true
             },
             "problemMatcher": []
+        },
+        {
+            "label": "github-release download",
+            "type": "shell",
+            "command": "github-release",
+            "args": [
+                "download",
+                "--user",
+                "ladislavlisy",
+                "--repo",
+                "payroll-maestro-080318",
+                "--latest",
+                "--name",
+                "payroll-maestro-server"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true
+            },
+            "problemMatcher": []
         }
     ]
 }
