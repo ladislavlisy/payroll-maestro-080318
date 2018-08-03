@@ -1,19 +1,24 @@
 language: go
-before_install:
-  - echo -e "machine github.com\n  login ladislavlisy\n  password $CI_USER_PASSWORD" > ~/.netrc
-install: 
-  - npm install
+install:
+- npm install
 go:
-  - "1.10.3"
+- 1.10.3
 before_script:
-  - go get -u github.com/gopherjs/gopherjs
-  - go get -u myitcv.io/react
-  - export PATH="$(dirname $(go list -f '{{.Target}}' myitcv.io/react/cmd/reactGen)):$PATH"
+- go get -u github.com/gopherjs/gopherjs
+- go get -u myitcv.io/react
+- export PATH="$(dirname $(go list -f '{{.Target}}' myitcv.io/react/cmd/reactGen)):$PATH"
 script:
-  - go get -u github.com/gin-gonic/gin
-  - go get -u go.isomorphicgo.org/go/isokit
-  - go get -u honnef.co/go/js/dom
-  - pwd
-  - ls -la
-  - cd $TRAVIS_BUILD_DIR/client && gopherjs build -o ../server/templates/js/client-app.js && cd ..
-  - cd $TRAVIS_BUILD_DIR/server && go build -o payroll-maestro-server && cd ..
+- go get -u github.com/gin-gonic/gin
+- go get -u go.isomorphicgo.org/go/isokit
+- go get -u honnef.co/go/js/dom
+- pwd
+- cd $TRAVIS_BUILD_DIR/client && gopherjs build -o ../server/templates/js/client-app.js
+  && cd ..
+- cd $TRAVIS_BUILD_DIR/server && go build -o payroll-maestro-server && cd ..
+deploy:
+  provider: releases
+  api_key:
+    secure: tNgh8rRS04aEuCr+V5xebFOjqMfNfjumNRv0EjG4J77gQJY4rW/FjpitYmM3EvSKfEsVLEtJB1Tt5JvMrkIc2wXhGoHsBKnNKwXgGOTdIYAShgGAhyYebPamRuZLGJxM2gSQCPbiJmDLiEIQvdRQEXfUm6eBIfKFsId72eY7GI648rue7BfyEBdXEzs3RN6MuLn9jacjXH18IRCQDh4q9I8xzx8txKpSUuEdFCAxEoAxw+DKHXDETf2r7BrYAKI4LP6jqFxjk+yRgKfAVQJ+bN9NEN0uQnfr8sh82o/kSk3eQ/H3PbcPki3wAG7z/9DG3t8ZDt8r1N8NMM9bJlJ+OrQKuiz00Il9tvpdOON22g7+0TrzScpu5lGFCC8g6jDgVuTEY6a/fxxyBc7k6f0L493T0zU43f9hmWKRn72UyoC+vpajWHPWG6eB5i5AI3V/+DLFnURj/w5F1ZKxVMS/SU44z6JAXQhqlQPF4EHoQRlATvPe9ZQBMW/ELeoZOHQw8Iu4RYJIcty/rMwBmD/LYpnzaUPjNk2Jbq3wMEyU75DbbtwKMw2T1Xq/+WWjCuQTpSRtpZ69Krs4HQ6dmMqk575hy88eTOAvS8wX7YRWHplEDXxbt+SfPbG2myGrpQEI3IDnSUseJm7va49777sndarSDfNQYHq4M4A55qN8B6w=
+  file: payroll-maestro-server
+  on:
+    repo: ladislavlisy/payroll-maestro-080318
