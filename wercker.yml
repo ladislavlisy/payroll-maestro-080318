@@ -40,12 +40,18 @@ build:
     - script:
         name: go build
         code: |
-          go build
+          export PATH="$(dirname $(go list -f '{{.Target}}' myitcv.io/react/cmd/reactGen)):$PATH"
+          cd $WERCKER_SOURCE_DIR/client
+          gopherjs build -o ../server/templates/js/client-app.js
+          cd $WERCKER_SOURCE_DIR/server
+          go build -o ../payroll-maestro-server
+          cd $WERCKER_SOURCE_DIR
 
     # Test the project
     - script:
         name: go test
         code: |
+          cd $WERCKER_SOURCE_DIR/server
           go test -v $(glide novendor)
 
     - script:
