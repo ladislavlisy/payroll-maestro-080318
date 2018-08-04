@@ -72,7 +72,7 @@ deploy:
        password: $DOCKER_PASSWORD
        port: "3000"
        working-dir: "/pipeline/source/"
-       cmd: "payroll-maestro-server"
+       cmd: "/pipeline/source/payroll-maestro-server"
        tag: latest
        repository: ladislavlisy/payroll-maestro-080318
        registry: https://registry.hub.docker.com
