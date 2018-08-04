@@ -62,6 +62,7 @@ build:
         name: copy files to wercker output
         code: |
           cp ./payroll-maestro-server ${WERCKER_OUTPUT_DIR}/.
+          mkdir ${WERCKER_OUTPUT_DIR}/templates
           cp -R ./server/templates ${WERCKER_OUTPUT_DIR}/templates/.
 
 
