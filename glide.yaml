@@ -1,0 +1,8 @@
+package: github.com/ladislavlisy/payroll-maestro-080318
+import:
+- package: github.com/gopherjs/gopherjs
+- package: myitcv.io/react
+- package: github.com/gin-gonic/gin
+- package: go.isomorphicgo.org/go/isokit
+- package: honnef.co/go/js/dom
+	
