@@ -71,7 +71,7 @@ deploy:
    - internal/docker-push:
        username: $DOCKER_USERNAME
        password: $DOCKER_PASSWORD
-       cmd: /pipeline/source/payroll-maestro-080318
+       cmd: /payroll-maestro-080318
        port: "8080"
        tag: latest
        repository: ladislavlisy/payroll-maestro-080318
