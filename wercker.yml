@@ -71,8 +71,8 @@ deploy:
    - internal/docker-push:
        username: $DOCKER_USERNAME
        password: $DOCKER_PASSWORD
-       cmd: /payroll-maestro-080318
-       port: "8080"
+       cmd: ./payroll-maestro-080318
+       port: "3000"
        tag: latest
        repository: ladislavlisy/payroll-maestro-080318
        registry: https://registry.hub.docker.com
