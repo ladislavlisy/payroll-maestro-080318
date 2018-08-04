@@ -61,9 +61,9 @@ build:
     - script:
         name: copy files to wercker output
         code: |
-          cp ./payroll-maestro-server ${WERCKER_OUTPUT_DIR}/.
-          mkdir ${WERCKER_OUTPUT_DIR}/templates
-          cp -R ./server/templates ${WERCKER_OUTPUT_DIR}/templates/.
+          cp ./payroll-maestro-server ${WERCKER_OUTPUT_DIR}/
+          cp -R ./server/templates ${WERCKER_OUTPUT_DIR}/
+          chmod +x ${WERCKER_OUTPUT_DIR}/payroll-maestro-server
 
 
 deploy:
