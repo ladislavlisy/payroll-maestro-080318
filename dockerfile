@@ -2,4 +2,6 @@ FROM scratch
 LABEL maintainer "ladislav.lisy@seznam.cz"
 
 COPY . /
-ENTRYPOINT [ "payroll-maestro-server" ]
+RUN chmod +x payroll-maestro-server
+
+CMD [ "payroll-maestro-server" ]
