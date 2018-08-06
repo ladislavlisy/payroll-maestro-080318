@@ -35,6 +35,7 @@ jobs:
       - run: |
           cd $CIRCLE_WORKING_DIRECTORY/server
           go build -o ../payroll-maestro-server
+          chmod +x ../payroll-maestro-server
 
       - setup_remote_docker:          
           docker_layer_caching: true # (3)
