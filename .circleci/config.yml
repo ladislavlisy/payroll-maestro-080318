@@ -35,11 +35,15 @@ jobs:
       - run: |
           cd $CIRCLE_WORKING_DIRECTORY/server
           go build -o ../payroll-maestro-server
-     - run: |
+
+      - setup_remote_docker:          
+          docker_layer_caching: true # (3)
+          
+      - run: |
          docker login -u $DOCKER_USER -p $DOCKER_PASS
 
-     # build the application image
-     - run: docker build -t ladislavlisy/payroll-maestro-080318:$CIRCLE_BRANCH .
+      # build the application image
+      - run: docker build -t ladislavlisy/payroll-maestro-080318:$CIRCLE_BRANCH .
 
-     # deploy the image
-     - run: docker push ladislavlisy/payroll-maestro-080318:$CIRCLE_BRANCH
+      # deploy the image  
+      - run: docker push ladislavlisy/payroll-maestro-080318:$CIRCLE_BRANCH
