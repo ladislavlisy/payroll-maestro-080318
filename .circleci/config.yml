@@ -17,7 +17,7 @@ jobs:
     #### expecting it in the form of
     ####   /go/src/github.com/circleci/go-tool
     ####   /go/src/bitbucket.org/circleci/go-tool
-    working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
+    working_directory: /go/src/github.com/ladislavlisy/payroll-maestro-080318
     steps:
       - checkout
 
@@ -38,7 +38,7 @@ jobs:
 
       - setup_remote_docker:          
           docker_layer_caching: true # (3)
-          
+
       - run: |
          docker login -u $DOCKER_USER -p $DOCKER_PASS
 
