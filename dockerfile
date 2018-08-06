@@ -1,4 +1,5 @@
 FROM scratch
 LABEL maintainer "ladislav.lisy@seznam.cz"
 
-COPY . /home
+COPY payroll-maestro-server /home/payroll-maestro-server
+COPY templates /home/templates
