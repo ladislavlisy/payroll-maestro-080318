@@ -1,0 +1,13 @@
+version: "3"
+networks: 
+  payroll-maestro:
+
+services:
+  payroll-maestro-frontend:
+    image: ladislavlisy/payroll-maestro-080318:master
+    ports:
+      - "8080:3000"
+    networks: 
+      - payroll-maestro
+    environment:
+      - PORT=3000
