@@ -4,6 +4,14 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "unix build all",
+            "dependsOn":[
+                "client gopherjs-build",
+                "unix server go build"
+            ],
+            "problemMatcher": []
+        },
+        {
             "label": "build all",
             "dependsOn":[
                 "client gopherjs-build",
@@ -58,6 +66,26 @@
                 "${workspaceFolder}/server/payroll-maestro-server"
             ],
            "options": {
+                "cwd": "${workspaceFolder}/server"
+            },
+            "problemMatcher": [
+                "$go"
+            ]
+        },
+        {
+            "label": "unix server go build",
+            "type": "shell",
+            "command": "go",
+            "args": [
+                "build",
+                "-o",
+                "${workspaceFolder}/server/payroll-maestro-server"
+            ],
+           "options": {
+               "env": {
+                    "GOOS": "linux",
+                    "CGO_ENABLED": "0"   
+                },
                 "cwd": "${workspaceFolder}/server"
             },
             "problemMatcher": [

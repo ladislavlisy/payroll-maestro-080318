@@ -1,0 +1,6 @@
+FROM scratch
+LABEL maintainer "ladislav.lisy@seznam.cz"
+
+COPY /server /
+
+CMD [ "./payroll-maestro-server" ]
