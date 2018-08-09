@@ -38,7 +38,7 @@ jobs:
           chmod +x ../payroll-maestro-server
     
       - setup_remote_docker:          
-          docker_layer_caching: true # (3)
+          docker_layer_caching: false # (3)
 
       - run: |
          docker login -u $DOCKER_USER -p $DOCKER_PASS
