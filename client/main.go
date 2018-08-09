@@ -23,5 +23,5 @@ func main() {
 
 	defer isoclient.RegisterRoutes(&env)
 
-	react.Render(app.App(app.AppProps{BrandName: "React GopherJS"}), domTarget)
+	react.Render(app.App(app.AppProps{BrandName: "Payroll Maestro"}), domTarget)
 }

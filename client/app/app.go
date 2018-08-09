@@ -3,8 +3,6 @@
 package app
 
 import (
-	"github.com/ladislavlisy/payroll-maestro-080318/client/components"
-
 	"myitcv.io/react"
 )
 
@@ -18,21 +16,24 @@ type AppProps struct {
 	BrandName string
 }
 
+type AppState struct {
+	userLoggedIn bool
+}
+
 func App(p AppProps) *AppElem {
 	return buildAppElem(p)
 }
 
+func (a AppDef) ComponentWillMount() {
+	s := a.State()
+	s.userLoggedIn = false
+	a.SetState(s)
+}
+
 func (a AppDef) Render() react.Element {
-	return react.Div(nil,
-		components.Navigation(components.NavigationProps{BrandName: a.Props().BrandName}),
-		react.Div(&react.DivProps{ClassName: "container", ID: "container"},
-			react.H1(nil,
-				react.S("Hello World "+a.Props().BrandName),
-			),
-			react.P(nil,
-				react.S("This is my first GopherJS React App."),
-			),
-			components.LinkButton(components.LinkButtonProps{Title: "Sing in", Href: "/index"}),
-		),
-	)
+	if a.State().userLoggedIn {
+		return UserSignedCentral(UserSignedCentralProps{BrandName: a.Props().BrandName, Title: "Sign Off", SignOffHref: "/"})
+	} else {
+		return UserSignInCentral(UserSignInCentralProps{BrandName: a.Props().BrandName, Title: "Sign In", SignInHref: "/"})
+	}
 }
