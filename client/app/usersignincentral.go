@@ -15,9 +15,9 @@ type UserSignInCentralDef struct {
 }
 
 type UserSignInCentralProps struct {
-	BrandName  string
-	Title      string
-	SignInHref string
+	BrandName string
+	Title     string
+	SignInApp AppDef
 }
 
 func UserSignInCentral(p UserSignInCentralProps) *UserSignInCentralElem {
@@ -34,7 +34,7 @@ func (r UserSignInCentralDef) Render() react.Element {
 			react.P(nil,
 				react.S("This is sign in page."),
 			),
-			components.LinkButton(components.LinkButtonProps{Title: r.Props().Title, Href: r.Props().SignInHref}),
+			ClickButton(ClickButtonProps{OnClickDef: r.Props().SignInApp, OnClickFlg: true, Title: r.Props().Title}),
 		),
 	)
 }

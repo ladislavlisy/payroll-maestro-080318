@@ -32,8 +32,8 @@ func (a AppDef) ComponentWillMount() {
 
 func (a AppDef) Render() react.Element {
 	if a.State().userLoggedIn {
-		return UserSignedCentral(UserSignedCentralProps{BrandName: a.Props().BrandName, Title: "Sign Off", SignOffHref: "/"})
+		return UserSignedCentral(UserSignedCentralProps{BrandName: a.Props().BrandName, Title: "Sign Off", SignOffApp: a})
 	} else {
-		return UserSignInCentral(UserSignInCentralProps{BrandName: a.Props().BrandName, Title: "Sign In", SignInHref: "/"})
+		return UserSignInCentral(UserSignInCentralProps{BrandName: a.Props().BrandName, Title: "Sign In", SignInApp: a})
 	}
 }
