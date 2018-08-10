@@ -71,5 +71,5 @@ func initRoutes(r *gin.Engine, config *oauth2.Config) {
 		)
 	})
 	r.GET("/login", login.LoginMidleware(config))
-	r.GET("/auth", authorize.AuthMidleware(config))
+	r.GET("/auth-callback", authorize.AuthMidleware(config))
 }
