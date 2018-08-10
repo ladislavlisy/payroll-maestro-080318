@@ -14,8 +14,8 @@ type ClickButtonDef struct {
 
 type ClickButtonProps struct {
 	Title      string
-	OnClickDef AppDef
-	OnClickFlg bool
+	Handler    AppSignHandler
+	HandlerFlg bool
 }
 
 func ClickButton(p ClickButtonProps) *ClickButtonElem {
@@ -23,20 +23,19 @@ func ClickButton(p ClickButtonProps) *ClickButtonElem {
 }
 
 type clickButtonChange struct {
-	a AppDef
+	h AppSignHandler
 	f bool
 }
 
 func (bc clickButtonChange) OnClick(e *react.SyntheticMouseEvent) {
-	appDef := bc.a
+	handler := bc.h
 	newFlag := bc.f
-	newAppState := appDef.State()
-	newAppState.userLoggedIn = newFlag
-	appDef.SetState(newAppState)
+
+	handler.HandleClickButton(newFlag)
 
 	e.PreventDefault()
 }
 
 func (r ClickButtonDef) Render() react.Element {
-	return react.A(&react.AProps{ClassName: "btn btn-primary", OnClick: clickButtonChange{a: r.Props().OnClickDef, f: r.Props().OnClickFlg}, Href: "#"}, react.S(r.Props().Title))
+	return react.A(&react.AProps{ClassName: "btn btn-primary", OnClick: clickButtonChange{h: r.Props().Handler, f: r.Props().HandlerFlg}, Href: "#"}, react.S(r.Props().Title))
 }

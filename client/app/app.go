@@ -20,6 +20,16 @@ type AppState struct {
 	userLoggedIn bool
 }
 
+type AppSignHandler interface {
+	HandleClickButton(flag bool)
+}
+
+type AppSignHandlerFunc func(bool)
+
+func (f AppSignHandlerFunc) HandleClickButton(flag bool) {
+	f(flag)
+}
+
 func App(p AppProps) *AppElem {
 	return buildAppElem(p)
 }
@@ -30,10 +40,18 @@ func (a AppDef) ComponentWillMount() {
 	a.SetState(s)
 }
 
+func AuthSignHandler(a AppDef) AppSignHandler {
+	return AppSignHandlerFunc(func(flag bool) {
+		newAppState := a.State()
+		newAppState.userLoggedIn = flag
+		a.SetState(newAppState)
+	})
+}
+
 func (a AppDef) Render() react.Element {
 	if a.State().userLoggedIn {
-		return UserSignedCentral(UserSignedCentralProps{BrandName: a.Props().BrandName, Title: "Sign Off", SignOffApp: a})
+		return UserSignedCentral(UserSignedCentralProps{BrandName: a.Props().BrandName, Title: "Sign Off", Handler: AuthSignHandler(a)})
 	} else {
-		return UserSignInCentral(UserSignInCentralProps{BrandName: a.Props().BrandName, Title: "Sign In", SignInApp: a})
+		return UserSignInCentral(UserSignInCentralProps{BrandName: a.Props().BrandName, Title: "Sign In", Handler: AuthSignHandler(a)})
 	}
 }

@@ -2,3 +2,5 @@ API releases
 payroll-maestro-server
 repositories
 .DS_Store
+env-oauth.local
+.env.local
