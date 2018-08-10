@@ -4,3 +4,5 @@ repositories
 .DS_Store
 env-oauth.local
 .env.local
+docker-compose-local.yml
+test.logge-local.md

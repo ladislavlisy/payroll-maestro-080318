@@ -40,11 +40,16 @@ func (a AppDef) ComponentWillMount() {
 	a.SetState(s)
 }
 
+func (a AppDef) setUserLoggedState(flag bool) {
+	newAppState := a.State()
+	newAppState.userLoggedIn = flag
+	a.SetState(newAppState)
+}
+
 func AuthSignHandler(a AppDef) AppSignHandler {
 	return AppSignHandlerFunc(func(flag bool) {
-		newAppState := a.State()
-		newAppState.userLoggedIn = flag
-		a.SetState(newAppState)
+
+		a.setUserLoggedState(flag)
 	})
 }
 
@@ -52,6 +57,6 @@ func (a AppDef) Render() react.Element {
 	if a.State().userLoggedIn {
 		return UserSignedCentral(UserSignedCentralProps{BrandName: a.Props().BrandName, Title: "Sign Off", Handler: AuthSignHandler(a)})
 	} else {
-		return UserSignInCentral(UserSignInCentralProps{BrandName: a.Props().BrandName, Title: "Sign In", Handler: AuthSignHandler(a)})
+		return UserSignInCentral(UserSignInCentralProps{BrandName: a.Props().BrandName, Title: "Sign In", Handler: AuthSignHandler(a), HttpRef: "/login"})
 	}
 }

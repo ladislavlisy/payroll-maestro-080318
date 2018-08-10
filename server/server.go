@@ -7,6 +7,7 @@ import (
 
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
+	"github.com/ladislavlisy/payroll-maestro-080318/server/authorize"
 	"github.com/ladislavlisy/payroll-maestro-080318/server/login"
 	"golang.org/x/oauth2"
 )
@@ -70,4 +71,5 @@ func initRoutes(r *gin.Engine, config *oauth2.Config) {
 		)
 	})
 	r.GET("/login", login.LoginMidleware(config))
+	r.GET("/auth", authorize.AuthMidleware(config))
 }
