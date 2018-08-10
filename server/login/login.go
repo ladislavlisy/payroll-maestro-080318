@@ -11,7 +11,7 @@ import (
 	"golang.org/x/oauth2"
 )
 
-func createRandomUid() string {
+func createRandomUID() string {
 	// Generate random state
 	byteuid := make([]byte, 32)
 	rand.Read(byteuid)
@@ -19,7 +19,8 @@ func createRandomUid() string {
 	return cstruid
 }
 
-func LoginMidleware(config *oauth2.Config) gin.HandlerFunc {
+// Midleware - Handler to Login
+func Midleware(config *oauth2.Config) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		domain := os.Getenv("AUTH0_DOMAIN")
 		aud := os.Getenv("AUTH0_AUDIENCE")
@@ -30,7 +31,7 @@ func LoginMidleware(config *oauth2.Config) gin.HandlerFunc {
 
 		sessions := sessions.Default(ctx)
 
-		state := createRandomUid()
+		state := createRandomUID()
 		sessions.Set("state", state)
 		sessions.Save()
 

@@ -2,6 +2,8 @@ package main
 
 import (
 	"crypto/rand"
+	"encoding/base64"
+	"log"
 	"net/http"
 	"os"
 
@@ -13,7 +15,7 @@ import (
 )
 
 const (
-	PAYROLL_MAESTRO_SESSION = "payroll-maestro-session"
+	PAYROLL_MAESTRO_SESSION = "payrollsession"
 )
 
 func NewServer() *gin.Engine {
@@ -29,8 +31,8 @@ func NewServer() *gin.Engine {
 		RedirectURL:  authCallback,
 		Scopes:       []string{"openid", "profile"},
 		Endpoint: oauth2.Endpoint{
-			AuthURL:  "https://" + authDomain + "/auth",
-			TokenURL: "https://" + authDomain + "/auth-token",
+			AuthURL:  "https://" + authDomain + "/authorize",
+			TokenURL: "https://" + authDomain + "/oauth/token",
 		},
 	}
 
@@ -47,9 +49,10 @@ func NewServer() *gin.Engine {
 
 func createSessionStore() sessions.CookieStore {
 	// Generate random state
-	state := make([]byte, 32)
+	state := make([]byte, 64)
 	rand.Read(state)
 	store := sessions.NewCookieStore(state)
+	log.Println("CookieStore (state): " + base64.StdEncoding.EncodeToString(state))
 	return store
 }
 
@@ -70,6 +73,6 @@ func initRoutes(r *gin.Engine, config *oauth2.Config) {
 			},
 		)
 	})
-	r.GET("/login", login.LoginMidleware(config))
-	r.GET("/auth-callback", authorize.AuthMidleware(config))
+	r.GET("/login", login.Midleware(config))
+	r.GET("/auth-callback", authorize.Midleware(config))
 }
